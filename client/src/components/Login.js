@@ -1,6 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 function Login() {
+  const [user, setUser] = useState({
+    usern: "",
+    pswd: "",
+  });
+
+  const handlechange = (e) => {
+    const value = e.target.value;
+    setUser((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: value,
+      };
+    });
+  };
+  function handleclick(event) {
+    event.preventDefault();
+    const userdata = {
+      username: user.usern,
+      password: user.pswd,
+    };
+    // axios
+    //   .post("/userfeed", userfeedb)
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    // setdone(true);
+  }
   return (
     <div>
       {/* data-bs-toggle="modal" data-bs-target="#exampleModal" */}
@@ -38,7 +69,10 @@ function Login() {
                 type="text"
                 className="form-control"
                 id="floatingInput"
+                name="usern"
                 placeholder="Enter your USN"
+                value={user.usern}
+                onChange={handlechange}
               />
               <label for="floatingInput ">Username</label>
             </div>
@@ -48,6 +82,9 @@ function Login() {
                 className="form-control"
                 id="floatingPassword"
                 placeholder="Password"
+                name="pswd"
+                value={user.pswd}
+                onChange={handlechange}
               />
               <label for="floatingPassword">Password</label>
             </div>
